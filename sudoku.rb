@@ -1,3 +1,5 @@
+# itintialaises game by creating instance of Board
+
 require 'board'
 
 def init_from_file file_name, board

@@ -1,3 +1,5 @@
+# represents group of cells that has to have unique elements
+# (row, column, block)
 class Group
   def initialize
     @elements = Array.new
