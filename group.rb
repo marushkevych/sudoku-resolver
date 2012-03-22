@@ -15,7 +15,7 @@ class Group
   
   def limit_variants
     @elements.each do |element|
-      element.limit_variants
+      element.remove_extra_variants
     end
   end
   
