@@ -18,12 +18,12 @@ end
   def add_line line
     row_num = @rows.size+1
     @rows[row_num]=Row.new
-    lineArray = line.scan(/./)
+    line_array = line.scan(/./)
     9.times do |i|
-      if Element.is_valid lineArray[i]
-        add_element(Element.new(lineArray[i], row_num, i+1), row_num, i+1 )
+      if Element.is_valid line_array[i]
+        add_element(Element.new(line_array[i], row_num, i+1), row_num, i+1 )
       else
-        puts "element #{lineArray[i]} is invalid"
+        puts "element #{line_array[i]} is invalid"
         return false
       end
     end
@@ -40,7 +40,7 @@ end
     @blank = get_blank 
     self.select
     
-    while (has_empty?)
+    while has_empty?
       @blank.each do |element|
         element.reset
       end
@@ -57,7 +57,7 @@ end
   
   def select
     @blank.each do |element|
-      if (!element.select)
+      if !element.select
         #puts "breaking out of select loop - will try next increment"
         break
       end
@@ -66,7 +66,7 @@ end
   
   
   def increment index
-    if (index == @blank.size)
+    if index == @blank.size
       puts "incremented all possible elements"
       return
     end
@@ -78,7 +78,7 @@ end
       index.times do |i|
         @blank[i].reset_variant
       end
-      if ((index+1) > @incremented)
+      if (index+1) > @incremented
         @incremented = index+1 
         puts "INCREMENTING #{index+1}"
         
@@ -93,7 +93,7 @@ end
   
   def has_empty?
     each do |element|
-      if (element.value == " ")
+      if element.value == " "
         return true
       end
     end 
@@ -103,11 +103,11 @@ end
   def get_blank
     blank = []
     each do |element|
-      if (element.blank?)
+      if element.blank?
         blank.push element
       end
     end 
-    return blank
+    blank
   end
   
   def set_variants

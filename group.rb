@@ -6,7 +6,7 @@ class Group
   end
   
   def add element
-    if (@elements.size == 9)
+    if @elements.size == 9
       raise "Can not add more then 9 elements"
     end
     @elements.push element

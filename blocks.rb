@@ -13,7 +13,7 @@ class Blocks
     row_index = index row_num
     col_index = index col_num
 
-    index = if (row_index == 1)
+    index = if row_index == 1
       col_index
     else
       (row_index - 1)*3 + col_index
