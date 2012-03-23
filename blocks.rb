@@ -1,4 +1,4 @@
-require 'block'
+require './block'
 class Blocks
   def initialize
     @blocks = {}
@@ -25,9 +25,9 @@ class Blocks
   
   def index (num)
     case num
-      when (1..3): 1
-      when (4..6): 2
-      when (7..9): 3
+      when (1..3); 1
+      when (4..6); 2
+      when (7..9); 3
     end
   end
   

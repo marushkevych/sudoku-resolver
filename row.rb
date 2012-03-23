@@ -1,4 +1,4 @@
-require 'group'
+require './group'
 class Row < Group
 
   def bind element

@@ -1,6 +1,6 @@
 # itintialaises game by creating instance of Board
 
-require 'board'
+require './board'
 
 def init_from_file file_name, board
   IO.foreach(file_name) {|line| board.add_line line } 

@@ -1,7 +1,7 @@
-require 'element'
-require 'row'
-require 'column'
-require 'blocks'
+require './element'
+require './row'
+require './column'
+require './blocks'
 
 class Board
   def initialize
@@ -49,10 +49,10 @@ end
       
       self.increment 0
       self.select
-      
-      print_board("solution")
-    
+
     end
+
+    print_board("solution")
   end
   
   def select
@@ -114,7 +114,7 @@ end
     each do |element|
       element.set_variants
     end 
-    print_board("after set_variants")
+    #print_board("after set_variants")
   end
   
   def reset

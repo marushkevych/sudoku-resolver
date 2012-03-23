@@ -1,4 +1,4 @@
-require 'group'
+require './group'
 class Block < Group
 
   def bind element

@@ -68,7 +68,7 @@ class Element
       return true
     end   
     
-    puts "trying to select variant #{@variant_index} in element (#{@row_index}, #{@col_index}), variants: #{@variants.inspect}"
+    #puts "trying to select variant #{@variant_index} in element (#{@row_index}, #{@col_index}), variants: #{@variants.inspect}"
     if @variants[@variant_index] != nil
       @selected = @variants[@variant_index]
       row.limit_variants
@@ -99,7 +99,7 @@ class Element
   
   def blank?
     case value
-      when " ": true
+      when " "; true
       else false
     end
   end
@@ -125,21 +125,13 @@ class Element
 
   def limit_variants
     if blank?
-      limit(row)
-      limit(column)
-      limit(block)
+      strip_variants(row)
+      strip_variants(column)
+      strip_variants(block)
     end
   end
 
   private
-  def limit (group)
-      group.each do |element|
-        @variants.each_index do |index|
-          @variants[index] = nil if element.value==@variants[index]
-        end
-      end
-  end
-
   def strip_variants (group)
       group.each do |element|
         @variants.delete_if do |value|
