@@ -23,7 +23,7 @@ end
 puts "Welcome to Sudoku"
 board = Board.new
 
-if (ARGV.size == 0)
+if ARGV.size == 0
   init_from_command board
 else
   init_from_file ARGV[0], board

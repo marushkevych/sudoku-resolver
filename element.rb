@@ -19,20 +19,20 @@ class Element
   attr_reader :col_index
 
   def set_variants
-    if (!set?)
-      (1..9).each do |i|
-        @variants[i-1]=i
-      end
-      self.remove_extra_variants
-      
-      @variants.compact!
-      
-      if (@variants.size == 1)
-        @init_value = @variants[0]
-      end
-      
-      #puts "Set variants in (#{@row_index}, #{@col_index}): #{@variants.inspect}"
+    return if set?
+
+    (1..9).each do |i|
+      @variants[i-1]=i
     end
+    self.remove_extra_variants
+
+    @variants.compact!
+
+    if @variants.size == 1
+      @init_value = @variants[0]
+    end
+
+    #puts "Set variants in (#{@row_index}, #{@col_index}): #{@variants.inspect}"
   end
   
   def increment_old
@@ -40,9 +40,9 @@ class Element
     @variant_index=@variant_index+1
     return false if @variant_index == 9
     
-    if (@variants.has_key? @variant_index)
+    if @variants.has_key? @variant_index
       puts "incremented to #{@variant_index}, returning true"
-      return true
+       true
     else
       puts "no variant with index #{@variant_index}, continue increment"
       self.increment
@@ -64,19 +64,19 @@ class Element
   
   
   def select
-    if(set?)
+    if set?
       return true
     end   
     
     puts "trying to select variant #{@variant_index} in element (#{@row_index}, #{@col_index}), variants: #{@variants.inspect}"
-    if (@variants[@variant_index] != nil)
+    if @variants[@variant_index] != nil
       @selected = @variants[@variant_index]
       row.limit_variants
       column.limit_variants
       block.limit_variants
-      return true
+       true
     else
-      return false
+       false
     end 
   end
   
@@ -88,9 +88,9 @@ class Element
   
   
   def value
-    if (@init_value)
+    if @init_value
       @init_value
-    elsif (@selected)
+    elsif @selected
       @selected
     else
       " "
@@ -103,12 +103,12 @@ class Element
       else false
     end
   end
-  
+
   def reset
     #puts "resetting element (#{@row_index}, #{@col_index})"
 
-    @variants.clear; 
-    @selected = nil;
+    @variants.clear
+    @selected = nil
     #set_variants
   end
   
@@ -118,20 +118,20 @@ class Element
   end
   
   def remove_extra_variants
-    strip_variants(row)
-    strip_variants(column)
-    strip_variants(block)
-  end
-   
+      strip_variants(row)
+      strip_variants(column)
+      strip_variants(block)
+    end
+
   def limit_variants
-    if (blank?)
+    if blank?
       limit(row)
       limit(column)
       limit(block)
-    end   
+    end
   end
-  
-  private  
+
+  private
   def limit (group)
       group.each do |element|
         @variants.each_index do |index|
@@ -139,7 +139,7 @@ class Element
         end
       end
   end
-  
+
   def strip_variants (group)
       group.each do |element|
         @variants.delete_if do |value|
