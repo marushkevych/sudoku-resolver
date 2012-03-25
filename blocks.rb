@@ -10,8 +10,8 @@ class Blocks
   
   def block(row_num, col_num)
     
-    row_index = index row_num
-    col_index = index col_num
+    row_index = derive_block_index row_num
+    col_index = derive_block_index col_num
 
     index = if row_index == 1
       col_index
@@ -22,8 +22,8 @@ class Blocks
     @blocks[index]
     
   end
-  
-  def index (num)
+  private
+  def derive_block_index (num)
     case num
       when (1..3); 1
       when (4..6); 2

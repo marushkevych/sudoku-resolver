@@ -29,5 +29,4 @@ else
   init_from_file ARGV[0], board
 end
 
-puts "The answer is:"
 board.resolve

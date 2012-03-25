@@ -9,10 +9,11 @@ class Board
     @blocks = Blocks.new
     @rows = {}
     @columns = {}
-    @incremented = 0
     9.times do |i|
       @columns[i+1]=Column.new
     end
+
+    @blanks = []
 end
   
   def add_line line
@@ -32,68 +33,60 @@ end
   
   def resolve
     print_board("before resolve:")
-    if @rows.size != 9 
+    unless @rows.size == 9
       raise "invalid board"
     end
-    
-    set_variants
-    @blank = get_blank 
-    self.select
-    
-    while has_empty?
-      @blank.each do |element|
-        element.reset
-      end
-      
-      set_variants
-      
-      self.increment 0
-      self.select
 
+    set_variants_initial
+    print_board("after initial set variants")
+    @blanks = get_blank
+    select_current_variants
+
+    while has_empty?
+      reset
+      set_variants
+      increment 0
+      select_current_variants
     end
 
     print_board("solution")
   end
-  
-  def select
-    @blank.each do |element|
-      if !element.select
-        #puts "breaking out of select loop - will try next increment"
-        break
-      end
-    end 
-  end
-  
-  
+
+
+
+  # ------------- private methods ----------------
+  private
   def increment index
-    if index == @blank.size
+    puts "trying to increment blank #{index+1}"
+    if index == @blanks.size
       puts "incremented all possible elements"
       return
     end
-  
-    if @blank[index].increment
-      return
-    else 
-      @blank[index].reset_variant
+
+    if @blanks[index].can_increment?
+      @blanks[index].increment
+    else
+      @blanks[index].reset_variant
       index.times do |i|
-        @blank[i].reset_variant
-      end
-      if (index+1) > @incremented
-        @incremented = index+1 
-        puts "INCREMENTING #{index+1}"
-        
+        @blanks[i].reset_variant
       end
       increment index+1
     end
-    
+
   end
-  
-  # ------------- private methods ----------------
-  private
+
+  def select_current_variants
+    @blanks.each do |element|
+      if !element.select_current_variant
+        print_board "breaking out of select loop - will try next increment"
+        break
+      end
+    end
+  end
   
   def has_empty?
     each do |element|
-      if element.value == " "
+      if element.blank?
         return true
       end
     end 
@@ -103,22 +96,27 @@ end
   def get_blank
     blank = []
     each do |element|
-      if element.blank?
+      unless element.value_provided?
         blank.push element
       end
     end 
     blank
   end
   
+  def set_variants_initial
+    each do |element|
+      element.set_variants_initial
+    end 
+  end
+
   def set_variants
     each do |element|
       element.set_variants
-    end 
-    #print_board("after set_variants")
+    end
   end
-  
+
   def reset
-    each do |element|
+    @blanks.each do |element|
       element.reset
     end
   end
@@ -154,7 +152,7 @@ end
   
   # linck each element to related Row Column and Block objects
   def add_element (element, row_num, col_num)
-    puts "adding element #{element} #{row_num} #{col_num}"
+    #puts "adding element #{element} #{row_num} #{col_num}"
     @rows[row_num].add element
     @columns[col_num].add element
     @blocks.block(row_num, col_num).add element

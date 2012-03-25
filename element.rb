@@ -10,51 +10,56 @@ class Element
       @row_index=row_index
       @col_index=col_index
       @variants=[]
+
+      # binding to cell's groups (set by groups)
+      @row=nil
+      @column=nil
+      @block=nil
     else 
       raise "invalid character #{ch}"
     end
   end
   
-  attr_accessor :row, :column, :block
+  attr_accessor :row, :column, :block, :variants, :variant_index
   attr_reader :col_index
 
+  def set_variants_initial
+    return if value_provided?
+    (1..9).each do |i|
+      @variants[i-1]=i
+    end
+    remove_extra_variants
+    #puts "Set variants in (#{@row_index}, #{@col_index}): #{@variants.inspect}"
+    if @variants.size == 1
+      @init_value = @variants[0]
+      #puts "Selected init_value in (#{@row_index}, #{@col_index}): #{@variants[0]}"
+    end
+  end
+
   def set_variants
-    return if set?
+    return if value_provided?
 
     (1..9).each do |i|
       @variants[i-1]=i
     end
-    self.remove_extra_variants
-
-    @variants.compact!
+    remove_extra_variants
+    #puts "Set variants in (#{@row_index}, #{@col_index}): #{@variants.inspect}"
 
     if @variants.size == 1
-      @init_value = @variants[0]
-    end
+      @selected = @variants[0]
+      #puts "Selected variant in (#{@row_index}, #{@col_index}): #{@variants[0]}"
 
-    #puts "Set variants in (#{@row_index}, #{@col_index}): #{@variants.inspect}"
-  end
-  
-  def increment_old
-    #puts "incrementing #{@variant_index} in element (#{@row_index}, #{@col_index}), variants: #{@variants.inspect}"
-    @variant_index=@variant_index+1
-    return false if @variant_index == 9
-    
-    if @variants.has_key? @variant_index
-      puts "incremented to #{@variant_index}, returning true"
-       true
-    else
-      puts "no variant with index #{@variant_index}, continue increment"
-      self.increment
     end
   end
-  
+
+  def can_increment?
+    @variant_index < (@variants.size - 1)
+  end
+
+
   def increment
-    @variant_index = @variant_index + 1
-    if @variant_index == @variants.size
-      return false
-    end
-    true
+    @variant_index += 1
+    puts "Incremented (#{@row_index}, #{@col_index}) to #{@variant_index}"
   end
   
   def reset_variant
@@ -63,12 +68,12 @@ class Element
   end
   
   
-  def select
-    if set?
+  def select_current_variant
+    if @init_value || @selected
       return true
-    end   
-    
-    #puts "trying to select variant #{@variant_index} in element (#{@row_index}, #{@col_index}), variants: #{@variants.inspect}"
+    end
+
+    puts "selecting variant #{@variant_index} in element (#{@row_index}, #{@col_index}), variants: #{@variants.inspect}"
     if @variants[@variant_index] != nil
       @selected = @variants[@variant_index]
       row.limit_variants
@@ -79,24 +84,7 @@ class Element
        false
     end 
   end
-  
-  
-  
-  def set?
-    @init_value != nil
-  end
-  
-  
-  def value
-    if @init_value
-      @init_value
-    elsif @selected
-      @selected
-    else
-      " "
-    end
-  end
-  
+
   def blank?
     case value
       when " "; true
@@ -111,18 +99,33 @@ class Element
     @selected = nil
     #set_variants
   end
-  
-  
+
   def to_s
     value.to_s
   end
-  
-  def remove_extra_variants
-      strip_variants(row)
-      strip_variants(column)
-      strip_variants(block)
-    end
 
+  def remove_extra_variants
+    strip_variants(row)
+    strip_variants(column)
+    strip_variants(block)
+  end
+
+  def value_provided?
+    @init_value != nil
+  end
+
+  protected
+  def value
+    if @init_value
+      @init_value
+    elsif @selected
+      @selected
+    else
+      " "
+    end
+  end
+
+  private
   def limit_variants
     if blank?
       strip_variants(row)
@@ -131,12 +134,16 @@ class Element
     end
   end
 
-  private
+
+
   def strip_variants (group)
       group.each do |element|
         @variants.delete_if do |value|
           element.value==value
         end
       end
-  end  
+  end
+
+
+
 end

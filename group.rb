@@ -26,7 +26,7 @@ class Group
   end
   
   def to_s
-    @elements
+    @elements.inspect
   end
   
   protected
