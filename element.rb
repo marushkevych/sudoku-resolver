@@ -126,16 +126,6 @@ class Element
   end
 
   private
-  def limit_variants
-    if blank?
-      strip_variants(row)
-      strip_variants(column)
-      strip_variants(block)
-    end
-  end
-
-
-
   def strip_variants (group)
       group.each do |element|
         @variants.delete_if do |value|

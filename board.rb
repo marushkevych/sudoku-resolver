@@ -14,9 +14,9 @@ class Board
     end
 
     @blanks = []
-end
+  end
   
-  def add_line line
+  def add_line(line)
     row_num = @rows.size+1
     @rows[row_num]=Row.new
     line_array = line.scan(/./)
@@ -56,7 +56,7 @@ end
 
   # ------------- private methods ----------------
   private
-  def increment index
+  def increment(index)
     puts "trying to increment blank #{index+1}"
     if index == @blanks.size
       puts "incremented all possible elements"
@@ -72,7 +72,17 @@ end
       end
       increment index+1
     end
+  end
 
+  def sort_blanks
+    #sort blanks - less variants - first
+    @blanks.sort! do |element1, element2|
+      if element1.variants.size == 0 && element2.variants.size != 0
+        1
+      else
+        element1.variants.size <=> element2.variants.size
+      end
+    end
   end
 
   def select_current_variants
@@ -122,7 +132,7 @@ end
   end
   
   
-  def print_board (comment)
+  def print_board(comment)
     puts comment
     puts '-------------------------'
     9.times do |i|
