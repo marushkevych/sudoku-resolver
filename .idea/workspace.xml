@@ -23,28 +23,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="sudoku.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sudoku.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="38" selection-start="145" selection-end="145" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="board.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="board.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/board.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="10" selection-start="108" selection-end="114" vertical-scroll-proportion="0.0">
+            <state line="44" column="17" selection-start="882" selection-end="882" vertical-scroll-proportion="0.31400967">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="element.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="element.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/element.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="106" column="6" selection-start="2295" selection-end="2295" vertical-scroll-proportion="1.9736842">
+            <state line="59" column="19" selection-start="1290" selection-end="1290" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -52,9 +43,22 @@
       </file>
     </leaf>
   </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
   <component name="Git.Settings">
     <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
     <option name="UPDATE_CHANGES_POLICY" value="STASH" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/board.rb" />
+        <option value="$PROJECT_DIR$/element.rb" />
+      </list>
+    </option>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -176,7 +180,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1555387" sideWeight="0.67230767" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18740515" sideWeight="0.67230767" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16388467" sideWeight="0.67230767" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -269,13 +273,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sudoku.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="38" selection-start="145" selection-end="145" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/block.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -314,16 +311,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/board.rb">
+    <entry file="file://$PROJECT_DIR$/sudoku.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="10" selection-start="108" selection-end="114" vertical-scroll-proportion="0.0">
+        <state line="5" column="38" selection-start="145" selection-end="145" vertical-scroll-proportion="0.12077295">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/rubystubs19/array.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="809" column="24" selection-start="26002" selection-end="26002" vertical-scroll-proportion="0.30917874">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/element.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="106" column="6" selection-start="2295" selection-end="2295" vertical-scroll-proportion="1.9736842">
+        <state line="59" column="19" selection-start="1290" selection-end="1290" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/board.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="17" selection-start="882" selection-end="882" vertical-scroll-proportion="0.31400967">
           <folding />
         </state>
       </provider>

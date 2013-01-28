@@ -4,6 +4,7 @@ require './column'
 require './blocks'
 
 class Board
+  attr_reader :blanks
   def initialize
     @lines = Array.new    
     @blocks = Blocks.new
@@ -30,8 +31,50 @@ class Board
     end
     true
   end
-  
+
   def resolve
+    print_board("before resolve:")
+    unless @rows.size == 9
+      raise "invalid board"
+    end
+
+    set_variants_initial
+    print_board("after initial set variants")
+
+    @blanks = get_blank
+    do_resolve 0;
+
+
+    print_board("solution")
+  end
+
+  def do_resolve(index)
+    return if !blanks[index]
+
+    # generate variants for current cell
+    blanks[index].generate_variants
+
+    select_variant index
+
+  end
+
+  def select_variant index
+    if blanks[index].has_more_variants
+      # if generated, select first variant
+      blanks[index].select_variant 0
+
+      print_board(index)
+      # go to next cell
+      do_resolve index + 1
+    else
+      # go to previous cell and disregard current variant
+      index = index - 1
+      blanks[index].remove_variant 0
+      select_variant index
+    end
+  end
+  
+  def resolve_old
     print_board("before resolve:")
     unless @rows.size == 9
       raise "invalid board"

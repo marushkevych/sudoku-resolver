@@ -36,6 +36,39 @@ class Element
     end
   end
 
+  def generate_variants
+    if value_provided?
+      raise "can not generate variants - fixed cell"
+    end
+
+    (1..9).each do |i|
+      @variants[i-1]=i
+    end
+
+    remove_extra_variants
+
+    if @variants.size > 0
+      true
+    else
+      @selected = nil
+      false
+    end
+  end
+
+  def remove_variant(index)
+    @variants.delete_at index
+    @selected = nil
+  end
+
+  def has_more_variants
+    @variants.size > 0
+  end
+
+  def select_variant index
+    @selected = @variants[index]
+  end
+
+  # deprecated
   def set_variants
     return if value_provided?
 
@@ -68,22 +101,7 @@ class Element
   end
   
   
-  def select_current_variant
-    if @init_value || @selected
-      return true
-    end
 
-    puts "selecting variant #{@variant_index} in element (#{@row_index}, #{@col_index}), variants: #{@variants.inspect}"
-    if @variants[@variant_index] != nil
-      @selected = @variants[@variant_index]
-      row.limit_variants
-      column.limit_variants
-      block.limit_variants
-       true
-    else
-       false
-    end 
-  end
 
   def blank?
     case value
