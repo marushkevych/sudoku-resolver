@@ -15,6 +15,8 @@ class Board
     end
 
     @blanks = []
+
+    @attempts = 0
   end
   
   def add_line(line)
@@ -42,58 +44,47 @@ class Board
     print_board("after initial set variants")
 
     @blanks = get_blank
-    do_resolve 0;
+    resolve_linear
 
-
+    puts "resolved in #{@attempts} attempts"
     print_board("solution")
   end
 
-  def do_resolve(index)
-    return if !blanks[index]
+  def resolve_linear
+    max = @blanks.size
+    index = 0
+    while(index < max)
+      blanks[index].generate_variants
 
-    # generate variants for current cell
-    blanks[index].generate_variants
+      new_index = select_variant_linear index
 
-    select_variant index
+      if new_index < index
+        @attempts +=1
+        
+      end
 
+      index = new_index
+    end
   end
 
-  def select_variant index
+  def select_variant_linear index
     if blanks[index].has_more_variants
       # if generated, select first variant
       blanks[index].select_variant 0
 
-      print_board(index)
+      #print_board(index)
       # go to next cell
-      do_resolve index + 1
+      index + 1
     else
       # go to previous cell and disregard current variant
       index = index - 1
       blanks[index].remove_variant 0
-      select_variant index
+      select_variant_linear index
     end
   end
-  
-  def resolve_old
-    print_board("before resolve:")
-    unless @rows.size == 9
-      raise "invalid board"
-    end
 
-    set_variants_initial
-    print_board("after initial set variants")
-    @blanks = get_blank
-    select_current_variants
 
-    while has_empty?
-      reset
-      set_variants
-      increment 0
-      select_current_variants
-    end
 
-    print_board("solution")
-  end
 
 
 
@@ -147,13 +138,14 @@ class Board
   end
   
   def get_blank
-    blank = []
+    blanks = []
     each do |element|
       unless element.value_provided?
-        blank.push element
+        blanks.push element
       end
-    end 
-    blank
+    end
+    blanks
+    #blanks.sort {|a, b| a.generate_variants <=> b.generate_variants}
   end
   
   def set_variants_initial

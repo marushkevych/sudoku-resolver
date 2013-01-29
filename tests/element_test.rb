@@ -32,4 +32,24 @@ class ElementTest < Test::Unit::TestCase
     assert_equal false, element.can_increment?
 
   end
+
+  def test_sort_array_of_elements
+    element1 = Element.new(" ", 1, 1)
+    element1.variants = [1]
+
+    element2 = Element.new(" ", 1, 2)
+    element2.variants = [1,2,3]
+
+    element3 = Element.new(" ", 1, 3)
+    element3.variants = [1,2]
+
+    elements = [];
+    elements.push element1;
+    elements.push element2;
+    elements.push element3;
+
+    assert_equal elements[0].col_index, 2
+
+
+  end
 end

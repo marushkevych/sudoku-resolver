@@ -53,6 +53,8 @@ class Element
       @selected = nil
       false
     end
+
+    @variants.size
   end
 
   def remove_variant(index)
